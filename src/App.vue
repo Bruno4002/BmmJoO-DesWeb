@@ -26,18 +26,18 @@ function confirma(){
 <template>
   <div class="container">
     <div class="login">
+      <label>Nome:</label>
       <input type="text" v-model="nome" placeholder="Nome">
-      <hr>
+      <label>Email:</label>
       <input type="email" v-model="email" placeholder="E-mail">
-      <hr>
+      <label>Senha:</label>
       <input type="password" v-model="senha" placeholder="Senha">
-      <hr>
+      <label>Confirme a senha:</label>
       <input type="password" v-model="confirmasenha" placeholder="Confirmar senha">
-      <hr>
+      <label>Data de nascimento:</label>
       <input type="date" v-model="datnasci" placeholder="Data de nascimento">
-      <hr>
+      <label>Endereço:</label>
       <input type="text" v-model="endereco" placeholder="Informe seu endereço">
-      <hr>
       <label>Informe o estado em que vive:</label>
       <select v-model="estado">
       <option value="AC">Acre</option>
@@ -68,10 +68,17 @@ function confirma(){
       <option value="SE">Sergipe</option>
       <option value="TO">Tocantins</option>
     </select>
-
-      
+    <label>Informe a cidade:</label>
+  <input type="text" v-model="cidade" placeholder="Informe a cidade">
+   <label>Hobbies:</label>
+   <input type="text" v-model="hobbies" placeholder="Seus hobbies">
+   <label>Linguagem de programação:</label>
+   <input type="text" v-model="linguagemprogram" placeholder="Linguagem de programação">
+   <label>Biografia:</label>
+   <textarea v-model="biografia" placeholder="Biografia"></textarea>
+   <button type="button" class="btn btn-primary btn block" @click="confirma" >Enviar</button>
     </div>
-    <button @click="confirma">Enviar</button>
+   
     <div class="infopessoal" v-if="enviar">
     <h3>Suas informações</h3>
     <p>Nome: {{ nome }}</p>
@@ -81,6 +88,10 @@ function confirma(){
     <p>Data de nascimento: {{ datnasci }}</p>
     <p>Endereço: {{ endereco }}</p>
     <p>Estado: {{ estado }}</p>
+    <p>Cidade: {{ cidade }}</p>
+    <p>Seus hobbies: {{ hobbies }}</p>
+    <p>Linguagem de programação: {{ linguagemprogram }}</p>
+    <p class="text-bio">Sua biografia: {{ biografia }}</p>
 
 
     </div>
@@ -98,4 +109,35 @@ function confirma(){
 </template>
 
 <style scoped>
+.text-bio{
+  word-wrap: break-word;
+  line-break: anywhere;
+}
+body{
+  background-color: dodgerblue;
+}
+.container{
+  display: flex;
+  justify-content: space-between;
+  width: 250px;  
+}
+.login{
+  background-color: lightblue;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.infopessoal{
+  display: flex;
+  background-color: lightcyan;
+  align-items: center;
+  flex-direction: column;
+}
+input{
+  margin: 10px;
+  margin-bottom: 10px;
+  
+}
+
 </style>
