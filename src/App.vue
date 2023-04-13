@@ -10,7 +10,7 @@ const endereco = ref('')
 const cidade = ref('')
 const estado = ref('')
 const hobbies = ref('')
-const linguagemprogram = ref('')
+const linguagemprogram = ref([])
 const biografia = ref('')
 
 const enviar = ref(false)
@@ -26,6 +26,7 @@ function confirma(){
 <template>
   <div class="container">
     <div class="login">
+      <h2>Faça o login</h2>
       <label>Nome:</label>
       <input type="text" v-model="nome" placeholder="Nome">
       <label>Email:</label>
@@ -72,11 +73,16 @@ function confirma(){
   <input type="text" v-model="cidade" placeholder="Informe a cidade">
    <label>Hobbies:</label>
    <input type="text" v-model="hobbies" placeholder="Seus hobbies">
-   <label>Linguagem de programação:</label>
-   <input type="text" v-model="linguagemprogram" placeholder="Linguagem de programação">
+   
+   <label for="linguagemprogram">Linguagem de programação:</label>
+   <p>
+   Java<input type="checkbox" v-model="linguagemprogram" value="Java"/>
+   Python<input type="checkbox" v-model="linguagemprogram" value="Python"/>
+   JavaScript<input type="checkbox" v-model="linguagemprogram" value="JavaScript"/>
+  </p>
    <label>Biografia:</label>
    <textarea v-model="biografia" placeholder="Biografia"></textarea>
-   <button type="button" class="btn btn-primary btn block" @click="confirma" >Enviar</button>
+   <button type="button" class="btn btn-primary " @click="confirma" >Enviar</button>
     </div>
    
     <div class="infopessoal" v-if="enviar">
@@ -90,10 +96,8 @@ function confirma(){
     <p>Estado: {{ estado }}</p>
     <p>Cidade: {{ cidade }}</p>
     <p>Seus hobbies: {{ hobbies }}</p>
-    <p>Linguagem de programação: {{ linguagemprogram }}</p>
+    <p>Linguagem de programação: {{ linguagemprogram.join(", ") }}</p>
     <p class="text-bio">Sua biografia: {{ biografia }}</p>
-
-
     </div>
 
 
@@ -113,31 +117,44 @@ function confirma(){
   word-wrap: break-word;
   line-break: anywhere;
 }
-body{
-  background-color: dodgerblue;
-}
 .container{
   display: flex;
-  justify-content: space-between;
-  width: 250px;  
+  justify-content: space-around;
+  width: 100%;  
 }
 .login{
-  background-color: lightblue;
+margin-top: 40px;
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  background-color: lightblue;
+  border-radius: 15px;
   align-items: center;
+  padding: 20px;
+  width: 500px;
+  color: black;
+  margin-bottom: 20px;
+
 }
 .infopessoal{
-  display: flex;
-  background-color: lightcyan;
-  align-items: center;
-  flex-direction: column;
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 1fr;
+  background-color: lightblue;
+  border-radius: 15px;
+  width: 500px;
+  padding: 50px;
+  color: black;
+  margin-bottom: 20px;
+
 }
 input{
   margin: 10px;
   margin-bottom: 10px;
   
+}
+button{
+  margin-top: 10px;
+  width: 100%;
 }
 
 </style>
