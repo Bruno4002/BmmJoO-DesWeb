@@ -16,29 +16,50 @@ const biografia = ref('')
 const enviar = ref(false)
 function confirma(){
   if(senha.value != confirmasenha.value){
-    alert("Senha incorreta")
-  }else(
-    enviar.value = !enviar.value
-  )
+    alert("Senha e confirmação não conferem")
+    return false
+  }else{
+     return true
+}
 }
 </script>
 
 <template>
   <div class="container">
+  <div class="infopessoal" v-if="enviar">
+    <h3>Suas informações</h3>
+    <p>Nome: {{ nome }}</p>
+    <p>Email: {{ email }}</p>
+    <p>Senha: {{ senha }}</p>
+    <p>Confirmar senha: {{ confirmasenha }}</p>
+    <p>Data de nascimento: {{ datnasci }}</p>
+    <p>Endereço: {{ endereco }}</p>
+    <p>Estado: {{ estado }}</p>
+    <p>Cidade: {{ cidade }}</p>
+    <p>Seus hobbies: {{ hobbies }}</p>
+    <p>Linguagem de programação: {{ linguagemprogram.join(", ") }}</p>
+    <p class="text-bio">Sua biografia: {{ biografia }}</p>
+    </div>
+
+
+  
+
+    <div v-else>
+      <form @submit.prevent="enviar= confirma()">
     <div class="login">
       <h2>Faça o login</h2>
       <label>Nome:</label>
-      <input type="text" v-model="nome" placeholder="Nome">
+      <input type="text" minlength="3" required v-model="nome" placeholder="Nome">
       <label>Email:</label>
-      <input type="email" v-model="email" placeholder="E-mail">
+      <input type="email" minlength="5" required v-model="email" placeholder="E-mail">
       <label>Senha:</label>
-      <input type="password" v-model="senha" placeholder="Senha">
+      <input type="password" minlength="6" required v-model="senha" placeholder="Senha">
       <label>Confirme a senha:</label>
-      <input type="password" v-model="confirmasenha" placeholder="Confirmar senha">
+      <input type="password" minlength="6" required v-model="confirmasenha" placeholder="Confirmar senha">
       <label>Data de nascimento:</label>
       <input type="date" v-model="datnasci" placeholder="Data de nascimento">
       <label>Endereço:</label>
-      <input type="text" v-model="endereco" placeholder="Informe seu endereço">
+      <input type="text" minlength="6" required v-model="endereco" placeholder="Informe seu endereço">
       <label>Informe o estado em que vive:</label>
       <select v-model="estado">
       <option value="AC">Acre</option>
@@ -70,9 +91,9 @@ function confirma(){
       <option value="TO">Tocantins</option>
     </select>
     <label>Informe a cidade:</label>
-  <input type="text" v-model="cidade" placeholder="Informe a cidade">
+  <input type="text" minlength="3" required v-model="cidade" placeholder="Informe a cidade">
    <label>Hobbies:</label>
-   <input type="text" v-model="hobbies" placeholder="Seus hobbies">
+   <input type="text" minlength="3" required v-model="hobbies" placeholder="Seus hobbies">
    
    <label for="linguagemprogram">Linguagem de programação:</label>
    <p>
@@ -81,35 +102,18 @@ function confirma(){
    JavaScript<input type="checkbox" v-model="linguagemprogram" value="JavaScript"/>
   </p>
    <label>Biografia:</label>
-   <textarea v-model="biografia" placeholder="Biografia"></textarea>
-   <button type="button" class="btn btn-primary " @click="confirma" >Enviar</button>
+   <textarea v-model="biografia" minlength="10" maxlength="250" placeholder="Biografia"></textarea>
+   <button type="submit" class="btn btn-dark ">Enviar</button>
     </div>
-   
-    <div class="infopessoal" v-if="enviar">
-    <h3>Suas informações</h3>
-    <p>Nome: {{ nome }}</p>
-    <p>Email: {{ email }}</p>
-    <p>Senha: {{ senha }}</p>
-    <p>Confirmar senha: {{ confirmasenha }}</p>
-    <p>Data de nascimento: {{ datnasci }}</p>
-    <p>Endereço: {{ endereco }}</p>
-    <p>Estado: {{ estado }}</p>
-    <p>Cidade: {{ cidade }}</p>
-    <p>Seus hobbies: {{ hobbies }}</p>
-    <p>Linguagem de programação: {{ linguagemprogram.join(", ") }}</p>
-    <p class="text-bio">Sua biografia: {{ biografia }}</p>
-    </div>
+  </form>
+</div>
+    
 
 
 
+</div>
 
 
-
-
-
-
-  </div>
-  
 </template>
 
 <style scoped>
@@ -123,38 +127,40 @@ function confirma(){
   width: 100%;  
 }
 .login{
-margin-top: 40px;
+margin-top: 15px;
   display: flex;
   flex-direction: column;
-  background-color: lightblue;
+  background-color: white;
   border-radius: 15px;
   align-items: center;
   padding: 20px;
   width: 500px;
-  color: black;
+  color: rgb(0, 0, 0);
   margin-bottom: 20px;
 
 }
 .infopessoal{
-  margin-top: 40px;
+  margin-top: 15px;
   display: grid;
   grid-template-columns: 1fr;
-  background-color: lightblue;
+  background-color: white;
   border-radius: 15px;
   width: 500px;
   padding: 50px;
-  color: black;
+  color: rgb(0, 0, 0);
   margin-bottom: 20px;
 
 }
 input{
   margin: 10px;
   margin-bottom: 10px;
+  border: 5px solid black;
+  border-radius: 10px;
   
 }
 button{
   margin-top: 10px;
   width: 100%;
+  font-size: large;
 }
-
 </style>
